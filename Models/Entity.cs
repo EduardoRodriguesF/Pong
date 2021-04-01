@@ -6,10 +6,10 @@ using System.Text;
 
 namespace Pong.Models {
     abstract class Entity {
+        public Rectangle Hitbox;
         protected float Speed;
         public Vector2 Position { get; protected set; }
 
         public abstract void Update(GameTime gameTime);
-        public abstract void Draw(SpriteBatch spriteBatch);
     }
 }
