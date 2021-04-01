@@ -10,11 +10,13 @@ namespace Pong.Managers {
         private Texture2D texture;
         private Player player;
         private Player enemy;
+        private Ball ball;
         private GraphicsDeviceManager graphics;
 
         public GameManager(GraphicsDeviceManager _graphics) {
             player = new Player(16, 16);
             enemy = new Player(_graphics.PreferredBackBufferWidth - 16, 16);
+            ball = new Ball(500, 100);            
 
             graphics = _graphics;
 
@@ -24,10 +26,12 @@ namespace Pong.Managers {
 
         public void Update(GameTime gameTime) {
             player.Update(gameTime);
+            ball.Update(gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch) {
             spriteBatch.Draw(texture, player.Hitbox, Color.White);
+            spriteBatch.Draw(texture, ball.Hitbox, Color.White);
         }
     }
 }
