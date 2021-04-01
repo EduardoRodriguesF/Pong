@@ -11,7 +11,7 @@ namespace Pong.Models {
 
         public Player(int x, int y) {
             Position = new Vector2(x, y);
-            Hitbox = new Rectangle((int)Position.X, (int)Position.Y, 32, 128);
+            Hitbox = new Rectangle((int)Position.X, (int)Position.Y, 24, 96);
 
             Speed = 5f;
         }
@@ -21,7 +21,7 @@ namespace Pong.Models {
 
             if (ks.IsKeyDown(Keys.Up) && Position.Y > 8) {
                 Velocity.Y = -Speed;
-            } else if (ks.IsKeyDown(Keys.Down) && Position.Y < 342) {
+            } else if (ks.IsKeyDown(Keys.Down) && Position.Y < 364) {
                 Velocity.Y = Speed;
             } else {
                 Velocity.Y = 0;
