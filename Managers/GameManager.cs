@@ -9,10 +9,12 @@ namespace Pong.Managers {
     class GameManager {
         private Texture2D texture;
         private Player player;
+        private Player enemy;
         private GraphicsDeviceManager graphics;
 
         public GameManager(GraphicsDeviceManager _graphics) {
             player = new Player(16, 16);
+            enemy = new Player(_graphics.PreferredBackBufferWidth - 16, 16);
 
             graphics = _graphics;
 
@@ -21,7 +23,7 @@ namespace Pong.Managers {
         }
 
         public void Update(GameTime gameTime) {
-
+            player.Update(gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch) {
