@@ -31,7 +31,7 @@ namespace Pong.Managers {
         public void StartGame() {
             player = new Player(16, graphics.PreferredBackBufferHeight/2 - 48);
             enemy = new Enemy(graphics.PreferredBackBufferWidth - 32, graphics.PreferredBackBufferHeight / 2 - 48);
-            ball = new Ball(500, 250);
+            ball = new Ball(500, graphics.PreferredBackBufferHeight/2 - 16);
             enemy.ball = ball;
 
             ball.Entities = new List<Entity>();

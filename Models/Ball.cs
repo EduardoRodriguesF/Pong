@@ -28,6 +28,12 @@ namespace Pong.Models {
                 foreach (Entity e in Entities) {
                     if (predictHitbox.Intersects(e.Hitbox)) {
                         Velocity.X *= -1;
+
+                        if (predictHitbox.Y - 48 < e.Hitbox.Y) {
+                            Velocity.Y = -Speed;
+                        } else {
+                            Velocity.Y = Speed;
+                        }
                     }
                 }
             }
