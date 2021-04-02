@@ -1,15 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Pong.Models {
-    class Player : Entity {
-        private KeyboardState ks;
+    class Enemy : Entity {
+        public Ball ball;
 
-        public Player(int x, int y) {
+        public Enemy(int x, int y) {
             Position = new Vector2(x, y);
             Hitbox = new Rectangle((int)Position.X, (int)Position.Y, 24, 96);
 
@@ -17,12 +15,14 @@ namespace Pong.Models {
         }
 
         public override void Update(GameTime gameTime) {
-            ks = Keyboard.GetState();
-
-            if (ks.IsKeyDown(Keys.Up) && Position.Y > 8) {
-                Velocity.Y = -Speed;
-            } else if (ks.IsKeyDown(Keys.Down) && Position.Y < 364) {
-                Velocity.Y = Speed;
+            if (ball != null && ball.Velocity.X > 0) {
+                if (ball.Hitbox.Y > Hitbox.Y + Hitbox.Height/2) {
+                    Velocity.Y = Speed;
+                } else if (ball.Hitbox.Y < Hitbox.Y + Hitbox.Height / 2) {
+                    Velocity.Y = -Speed;
+                } else {
+                    Velocity.Y = 0;
+                }
             } else {
                 Velocity.Y = 0;
             }

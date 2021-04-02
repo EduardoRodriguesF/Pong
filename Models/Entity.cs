@@ -8,7 +8,7 @@ namespace Pong.Models {
     abstract class Entity {
         public Rectangle Hitbox;
         protected float Speed;
-        protected Vector2 Velocity;
+        public Vector2 Velocity;
 
         public Vector2 Position { get; protected set; }
 
