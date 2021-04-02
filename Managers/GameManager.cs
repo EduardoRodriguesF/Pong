@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Pong.Models;
 using System;
@@ -14,12 +15,15 @@ namespace Pong.Managers {
         private GraphicsDeviceManager graphics;
         public int PlayerScores;
         public int EnemyScores;
+        private SpriteFont gameFont;
 
-        public GameManager(GraphicsDeviceManager _graphics) {
+        public GameManager(GraphicsDeviceManager _graphics, ContentManager content) {
             graphics = _graphics;
 
             texture = new Texture2D(graphics.GraphicsDevice, 1, 1);
             texture.SetData(new Color[] { Color.White });
+
+            gameFont = content.Load<SpriteFont>("gameFont");
 
             StartGame();
         }
@@ -53,6 +57,9 @@ namespace Pong.Managers {
             spriteBatch.Draw(texture, player.Hitbox, Color.White);
             spriteBatch.Draw(texture, enemy.Hitbox, Color.White);
             spriteBatch.Draw(texture, ball.Hitbox, Color.White);
+
+            spriteBatch.DrawString(gameFont, PlayerScores.ToString(), new Vector2(100, 32), Color.White);
+            spriteBatch.DrawString(gameFont, EnemyScores.ToString(), new Vector2(graphics.PreferredBackBufferWidth - 100, 32), Color.White);
         }
     }
 }

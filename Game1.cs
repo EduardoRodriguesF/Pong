@@ -25,7 +25,7 @@ namespace Pong {
         protected override void LoadContent() {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            gameManager = new GameManager(_graphics);
+            gameManager = new GameManager(_graphics, Content);
         }
 
         protected override void Update(GameTime gameTime) {
