@@ -12,27 +12,41 @@ namespace Pong.Managers {
         private Enemy enemy;
         private Ball ball;
         private GraphicsDeviceManager graphics;
+        public int PlayerScores;
+        public int EnemyScores;
 
         public GameManager(GraphicsDeviceManager _graphics) {
-            player = new Player(16, 16);
-            enemy = new Enemy(_graphics.PreferredBackBufferWidth - 32, 16);
-            ball = new Ball(500, 100);
+            graphics = _graphics;
+
+            texture = new Texture2D(graphics.GraphicsDevice, 1, 1);
+            texture.SetData(new Color[] { Color.White });
+
+            StartGame();
+        }
+
+        public void StartGame() {
+            player = new Player(16, graphics.PreferredBackBufferHeight/2 - 48);
+            enemy = new Enemy(graphics.PreferredBackBufferWidth - 32, graphics.PreferredBackBufferHeight / 2 - 48);
+            ball = new Ball(500, 250);
             enemy.ball = ball;
 
             ball.Entities = new List<Entity>();
             ball.Entities.Add(player);
             ball.Entities.Add(enemy);
-
-            graphics = _graphics;
-
-            texture = new Texture2D(graphics.GraphicsDevice, 1, 1);
-            texture.SetData(new Color[] { Color.White });
         }
 
         public void Update(GameTime gameTime) {
             player.Update(gameTime);
             enemy.Update(gameTime);
             ball.Update(gameTime);
+
+            if (ball.Hitbox.X < 0) {
+                EnemyScores++;
+                StartGame();
+            } else if (ball.Hitbox.X > graphics.PreferredBackBufferWidth) {
+                PlayerScores++;
+                StartGame();
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch) {
