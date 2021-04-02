@@ -16,8 +16,11 @@ namespace Pong.Managers {
         public GameManager(GraphicsDeviceManager _graphics) {
             player = new Player(16, 16);
             enemy = new Player(_graphics.PreferredBackBufferWidth - 16, 16);
-            ball = new Ball(500, 100);            
+            ball = new Ball(500, 100);
 
+            ball.Entities = new List<Entity>();
+            ball.Entities.Add(player);
+            ball.Entities.Add(enemy);
             graphics = _graphics;
 
             texture = new Texture2D(graphics.GraphicsDevice, 1, 1);
